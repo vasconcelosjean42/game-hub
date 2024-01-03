@@ -1,4 +1,5 @@
 import { css } from "../../styled-system/css";
+import Content from "./Content";
 import Sidebar from "./Sidebar";
 
 const Conteiner = () => {
@@ -11,6 +12,7 @@ const Conteiner = () => {
       })}
     >
       <Sidebar></Sidebar>
+      <Content></Content>
     </div>
   );
 };
