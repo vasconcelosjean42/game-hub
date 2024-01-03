@@ -29,14 +29,14 @@ const Filters = () => {
   }, []);
 
   return (
-    <div className={css({ display: "flex" })}>
+    <div className={css({ display: "flex", marginBottom: "6" })}>
       <select
         name="plataform"
         id="plataform"
         className={css({
           padding: "2",
           color: "slate.100",
-          backgroundColor: "slate.700",
+          backgroundColor: "slate.900",
           borderRadius: "lg",
         })}
       >
@@ -55,7 +55,7 @@ const Filters = () => {
           marginLeft: "4",
           padding: "2",
           color: "slate.100",
-          backgroundColor: "slate.700",
+          backgroundColor: "slate.900",
           borderRadius: "lg",
         })}
       >

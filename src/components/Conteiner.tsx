@@ -8,7 +8,7 @@ const Conteiner = () => {
       className={css({
         display: "flex",
         padding: "5",
-        backgroundColor: "slate.900",
+        backgroundColor: "slate.950",
       })}
     >
       <Sidebar></Sidebar>
