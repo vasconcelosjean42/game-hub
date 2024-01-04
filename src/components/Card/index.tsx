@@ -1,5 +1,5 @@
-import { css } from "../../styled-system/css";
-import { GameProps } from "./Content";
+import { css } from "../../../styled-system/css";
+import { GameProps } from "../Content";
 
 interface Props {
   game: GameProps;

@@ -1,21 +1,18 @@
-import { css } from "../../styled-system/css";
-import gameHubLogo from "../assets/game-hub-logo.png";
+import { css } from "../../../styled-system/css";
+import gameHubLogo from "../../assets/game-hub-logo.png";
 import { IoSearchOutline } from "react-icons/io5";
-const Navbar = () => {
+import { navbarReceipt } from "./style";
+import { useContext } from "react";
+import { Context } from "../../App";
+
+interface Props {
+  setTheme: () => void;
+}
+
+const Navbar = ({ setTheme }: Props) => {
+  const theme = useContext(Context);
   return (
-    <div
-      className={css({
-        width: "full",
-        height: "16",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        objectFit: "contain",
-        paddingX: "20",
-        paddingY: "2",
-        backgroundColor: "slate.700",
-      })}
-    >
+    <div className={navbarReceipt()}>
       <img className={css({ height: "100%" })} src={gameHubLogo} />
       <div
         className={css({
@@ -29,7 +26,7 @@ const Navbar = () => {
           borderRadius: "lg",
         })}
       >
-        <IoSearchOutline className={css({ color: "white" })} />
+        <IoSearchOutline className={css({ color: "slate.300" })} />
         <input
           className={css({
             width: "full",
@@ -44,7 +41,7 @@ const Navbar = () => {
         />
       </div>
       <label>
-        <input type="checkbox"></input>
+        <input type="checkbox" checked={theme} onChange={setTheme}></input>
         <span>Dark Mode</span>
       </label>
     </div>

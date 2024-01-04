@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Filters from "./Filters";
-import Card from "./Card";
-import SouthParkTheStickOfTruth from "../assets/south-park-the-stick-of-truth.png";
-import FarCry from "../assets/far-cry-3.jpg";
-import CallOfDuty from "../assets/call-of-duty.png";
-import BaldursGate from "../assets/baldurs-gate.png";
+import Filters from "../Filter";
+import Card from "../Card";
+import SouthParkTheStickOfTruth from "../../assets/south-park-the-stick-of-truth.png";
+import FarCry from "../../assets/far-cry-3.jpg";
+import CallOfDuty from "../../assets/call-of-duty.png";
+import BaldursGate from "../../assets/baldurs-gate.png";
 
 import {
   FaWindows,
@@ -15,7 +15,7 @@ import {
   FaAndroid,
 } from "react-icons/fa";
 import { BsNintendoSwitch } from "react-icons/bs";
-import { css } from "../../styled-system/css";
+import { css } from "../../../styled-system/css";
 
 export interface GameProps {
   name: string;

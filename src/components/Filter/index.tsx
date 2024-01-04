@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { css } from "../../styled-system/css";
+import { css } from "../../../styled-system/css";
 
 const Filters = () => {
   const [plataforms, setPlataforms] = useState<string[]>([]);
