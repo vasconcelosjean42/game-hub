@@ -13,7 +13,6 @@ const Sidebar = () => {
     <div
       className={css({
         width: "1/6",
-        height: "85vh",
         color: "slate.100",
       })}
     >

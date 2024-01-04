@@ -1,22 +1,6 @@
-import React, { useEffect, useState } from "react";
 import { css } from "../../styled-system/css";
-import SouthParkTheStickOfTruth from "../assets/south-park-the-stick-of-truth.png";
-
-const Card = () => {
-  const [plataforms, setPlataforms] = useState<string[]>([]);
-
-  useEffect(() => {
-    setPlataforms([
-      "Windows",
-      "Mac",
-      "Linux",
-      "PS4",
-      "Xbox",
-      "Nintendo",
-      "Android",
-      "iOS",
-    ]);
-  }, []);
+import { GameProps } from "./Content";
+const Card = (game: GameProps) => {
   return (
     <div
       className={css({
@@ -36,7 +20,7 @@ const Card = () => {
         })}
       >
         <img
-          src={SouthParkTheStickOfTruth}
+          src={image}
           className={css({
             width: "full",
             height: "60",
@@ -60,38 +44,39 @@ const Card = () => {
           className={css({
             display: "flex",
             justifyContent: "space-between",
-            backgroundColor: "green",
           })}
         >
           <div
             id="plataformIcons"
             className={css({
               display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontSize: "2xl",
             })}
           >
             {plataforms.map((plataform) => (
-              <p className={css({ marginRight: "2" })}>
-                {plataform.slice(0, 1)}
-              </p>
+              <plataform.plataformIcon
+                className={css({ color: "slate.500", marginLeft: "2.5" })}
+              />
             ))}
           </div>
           <div
             id="relevancia"
             className={css({
               color: "green.300",
-              bgColor: "green.200",
-              padding: "0.5",
-              paddingInline: "3",
+              bgColor: "slate.700",
+              padding: "1",
+              paddingInline: "4",
               borderRadius: "sm",
+              fontWeight: "bold",
             })}
           >
-            <p>92</p>
+            <p>{relevance}</p>
           </div>
         </div>
-        <h1 className={css({ fontSize: "5xl", fontWeight: "bold" })}>
-          South park
-        </h1>
-        <h2>The stick of truth</h2>
+        <h1 className={css({ fontSize: "5xl", fontWeight: "bold" })}>{name}</h1>
+        <h2 className={css({ fontSize: "4xl" })}>{icon}</h2>
       </div>
     </div>
   );
