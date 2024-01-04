@@ -6,7 +6,7 @@ const App = () => {
   return (
     <div
       className={css({
-        width: "100vw",
+        width: "full",
         height: "100vh",
         display: "flex",
         flexDirection: "column",

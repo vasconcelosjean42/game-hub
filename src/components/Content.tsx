@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import Filters from "./Filters";
 import Card from "./Card";
 import SouthParkTheStickOfTruth from "../assets/south-park-the-stick-of-truth.png";
+import FarCry from "../assets/far-cry-3.jpg";
+import CallOfDuty from "../assets/call-of-duty.png";
+import BaldursGate from "../assets/baldurs-gate.png";
+
 import {
   FaWindows,
   FaApple,
@@ -11,6 +15,7 @@ import {
   FaAndroid,
 } from "react-icons/fa";
 import { BsNintendoSwitch } from "react-icons/bs";
+import { css } from "../../styled-system/css";
 
 export interface GameProps {
   name: string;
@@ -43,16 +48,77 @@ const Content = () => {
           { plataformName: "Android", plataformIcon: BsNintendoSwitch },
         ],
       },
+      {
+        name: "FarCry",
+        image: FarCry,
+        relevance: 90,
+        icon: "🎯",
+        plataforms: [
+          { plataformName: "Windows", plataformIcon: FaWindows },
+          { plataformName: "Linux", plataformIcon: FaLinux },
+          { plataformName: "PS4", plataformIcon: FaPlaystation },
+          { plataformName: "Nintendo", plataformIcon: FaAndroid },
+          { plataformName: "Android", plataformIcon: BsNintendoSwitch },
+        ],
+      },
+      {
+        name: "CallOfDuty",
+        image: CallOfDuty,
+        relevance: 89,
+        icon: "🎯",
+        plataforms: [
+          { plataformName: "Windows", plataformIcon: FaWindows },
+          { plataformName: "Linux", plataformIcon: FaLinux },
+          { plataformName: "PS4", plataformIcon: FaPlaystation },
+          { plataformName: "Android", plataformIcon: BsNintendoSwitch },
+        ],
+      },
+      {
+        name: "Baldurs Gate",
+        image: BaldursGate,
+        relevance: 99,
+        icon: "🎲",
+        plataforms: [
+          { plataformName: "Windows", plataformIcon: FaWindows },
+          { plataformName: "Mac", plataformIcon: FaApple },
+          { plataformName: "Linux", plataformIcon: FaLinux },
+          { plataformName: "PS4", plataformIcon: FaPlaystation },
+          { plataformName: "Xbox", plataformIcon: FaXbox },
+          { plataformName: "Nintendo", plataformIcon: FaAndroid },
+          { plataformName: "Android", plataformIcon: BsNintendoSwitch },
+        ],
+      },
     ]);
   }, []);
 
   return (
-    <div>
-      <h1>Games</h1>
+    <div
+      className={css({
+        display: "flex",
+        flexDirection: "column",
+      })}
+    >
+      <h1
+        className={css({
+          fontSize: "5xl",
+          fontWeight: "bold",
+          color: "slate.100",
+        })}
+      >
+        Games
+      </h1>
       <Filters />
-      {games.map((game) => (
-        <Card />
-      ))}
+      <div
+        className={css({
+          width: "1200px",
+          display: "flex",
+          flexWrap: "wrap",
+        })}
+      >
+        {games.map((game) => (
+          <Card game={game} />
+        ))}
+      </div>
     </div>
   );
 };

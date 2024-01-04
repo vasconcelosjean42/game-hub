@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { css } from "../../styled-system/css";
 import Content from "./Content";
 import Sidebar from "./Sidebar";
@@ -10,7 +9,6 @@ const Conteiner = () => {
         display: "flex",
         padding: "5",
         backgroundColor: "slate.950",
-        flex: 1,
       })}
     >
       <Sidebar></Sidebar>

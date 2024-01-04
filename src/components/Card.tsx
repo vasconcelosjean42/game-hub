@@ -1,6 +1,11 @@
 import { css } from "../../styled-system/css";
 import { GameProps } from "./Content";
-const Card = (game: GameProps) => {
+
+interface Props {
+  game: GameProps;
+}
+
+const Card = ({ game }: Props) => {
   return (
     <div
       className={css({
@@ -11,6 +16,8 @@ const Card = (game: GameProps) => {
         color: "slate.100",
         backgroundColor: "slate.900",
         borderRadius: "2xl",
+        marginRight: "4",
+        marginBottom: "4",
       })}
     >
       <div
@@ -20,7 +27,7 @@ const Card = (game: GameProps) => {
         })}
       >
         <img
-          src={image}
+          src={game.image}
           className={css({
             width: "full",
             height: "60",
@@ -55,7 +62,7 @@ const Card = (game: GameProps) => {
               fontSize: "2xl",
             })}
           >
-            {plataforms.map((plataform) => (
+            {game.plataforms.map((plataform) => (
               <plataform.plataformIcon
                 className={css({ color: "slate.500", marginLeft: "2.5" })}
               />
@@ -72,11 +79,13 @@ const Card = (game: GameProps) => {
               fontWeight: "bold",
             })}
           >
-            <p>{relevance}</p>
+            <p>{game.relevance}</p>
           </div>
         </div>
-        <h1 className={css({ fontSize: "5xl", fontWeight: "bold" })}>{name}</h1>
-        <h2 className={css({ fontSize: "4xl" })}>{icon}</h2>
+        <h1 className={css({ fontSize: "5xl", fontWeight: "bold" })}>
+          {game.name}
+        </h1>
+        <h2 className={css({ fontSize: "4xl" })}>{game.icon}</h2>
       </div>
     </div>
   );
