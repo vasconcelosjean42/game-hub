@@ -3,10 +3,10 @@ import { css } from "../styled-system/css";
 import Conteiner from "./components/Conteiner";
 import Navbar from "./components/Navbar";
 
-export const Context = createContext<string | undefined>(undefined);
+export const Context = createContext<"light" | "dark" | undefined>(undefined);
 
 const App = () => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState<"light" | "dark" | undefined>("dark");
 
   return (
     <Context.Provider value={theme}>
@@ -19,13 +19,12 @@ const App = () => {
         })}
       >
         <Navbar
-          theme={theme}
-          handleLight={() => {
+          setTheme={() => {
             setTheme((prevState) => (prevState === "dark" ? "light" : "dark"));
             console.log(theme);
           }}
         ></Navbar>
-        <Conteiner theme={theme}></Conteiner>
+        <Conteiner></Conteiner>
       </div>
     </Context.Provider>
   );

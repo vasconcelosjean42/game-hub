@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { css } from "../../../styled-system/css";
+import { filterReceipt } from "./style";
+import { Context } from "../../App";
 
 const Filters = () => {
   const [plataforms, setPlataforms] = useState<string[]>([]);
-
   const [orders, setOrders] = useState<string[]>([]);
-
+  const theme = useContext(Context);
   useEffect(() => {
     setPlataforms([
       "Windows",
@@ -33,12 +34,7 @@ const Filters = () => {
       <select
         name="plataform"
         id="plataform"
-        className={css({
-          padding: "2",
-          color: "slate.100",
-          backgroundColor: "slate.900",
-          borderRadius: "lg",
-        })}
+        className={filterReceipt({ visual: theme, space: "m" })}
       >
         <option selected disabled hidden>
           Plataform
@@ -51,13 +47,7 @@ const Filters = () => {
         name="order"
         id="order"
         defaultValue="Relevance"
-        className={css({
-          marginLeft: "4",
-          padding: "2",
-          color: "slate.100",
-          backgroundColor: "slate.900",
-          borderRadius: "lg",
-        })}
+        className={filterReceipt({ visual: theme })}
       >
         {orders.map((order) => (
           <option value={order}>Order by: {order}</option>

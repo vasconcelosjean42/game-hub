@@ -1,14 +1,14 @@
 import { conteinerReceipt } from "./style";
 import Content from "../Content";
-import Sidebar from "../Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
+import { useContext } from "react";
+import { Context } from "../../App";
 
-interface Props {
-  isLight: boolean;
-}
+const Conteiner = () => {
+  const theme = useContext(Context);
 
-const Conteiner = ({ isLight }: Props) => {
   return (
-    <div className={conteinerReceipt({ visual: isLight ? "light" : "dark" })}>
+    <div className={conteinerReceipt({ visual: theme })}>
       <Sidebar></Sidebar>
       <Content></Content>
     </div>

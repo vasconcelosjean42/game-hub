@@ -1,21 +1,19 @@
-import { useEffect, useState } from "react";
-import Farcry3 from "../assets/far-cry-3.jpg";
-import { css } from "../../styled-system/css";
+import { useContext, useEffect, useState } from "react";
+import Farcry3 from "../../assets/far-cry-3.jpg";
+import { css } from "../../../styled-system/css";
+import { Context } from "../../App";
+import { sidebarReceipt } from "./style";
 
 const Sidebar = () => {
   const [genres, setGenres] = useState<string[]>([]);
+  const theme = useContext(Context);
 
   useEffect(() => {
     setGenres(["Action", "Indie", "Adventure", "RPG", "Strategy", "Shooter"]);
   }, []);
 
   return (
-    <div
-      className={css({
-        width: "1/6",
-        color: "slate.100",
-      })}
-    >
+    <div className={sidebarReceipt({ visual: theme })}>
       <h1
         className={css({
           fontSize: "2xl",
@@ -44,9 +42,7 @@ const Sidebar = () => {
                 marginRight: "2",
               })}
             />
-            <span className={css({ color: "slate.100", fontSize: "large" })}>
-              {genre}
-            </span>
+            <span className={css({ fontSize: "large" })}>{genre}</span>
           </li>
         ))}
       </ul>

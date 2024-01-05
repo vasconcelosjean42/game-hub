@@ -14,7 +14,7 @@ export const navbarReceipt = cva({
   variants: {
     visual: {
       light: {
-        backgroundColor: "slate.400",
+        backgroundColor: "slate.100",
       },
       dark: {
         backgroundColor: "slate.700",

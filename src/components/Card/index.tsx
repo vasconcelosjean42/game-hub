@@ -1,28 +1,20 @@
+import { useContext } from "react";
 import { css } from "../../../styled-system/css";
 import { GameProps } from "../Content";
+import { cardReceipt } from "./style";
+import { Context } from "../../App";
 
 interface Props {
   game: GameProps;
 }
 
 const Card = ({ game }: Props) => {
+  const theme = useContext(Context);
+
   return (
-    <div
-      className={css({
-        width: "sm",
-        height: "md",
-        display: "flex",
-        flexDirection: "column",
-        color: "slate.100",
-        backgroundColor: "slate.900",
-        borderRadius: "2xl",
-        marginRight: "4",
-        marginBottom: "4",
-      })}
-    >
+    <div className={cardReceipt({ visual: theme })}>
       <div
         className={css({
-          color: "slate.100",
           display: "flex",
         })}
       >
@@ -42,7 +34,6 @@ const Card = ({ game }: Props) => {
           display: "flex",
           flex: "1",
           flexDirection: "column",
-          backgroundColor: "slate.900",
           borderBottomRadius: "2xl",
           padding: "4",
         })}

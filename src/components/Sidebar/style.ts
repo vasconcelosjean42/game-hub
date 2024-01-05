@@ -1,9 +1,8 @@
 import { cva } from "../../../styled-system/css";
 
-export const contentReceipt = cva({
+export const sidebarReceipt = cva({
   base: {
-    display: "flex",
-    flexDirection: "column",
+    width: "1/6"
   },
   variants: {
     visual: {

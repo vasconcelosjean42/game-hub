@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Filters from "../Filter";
 import Card from "../Card";
 import SouthParkTheStickOfTruth from "../../assets/south-park-the-stick-of-truth.png";
@@ -16,6 +16,8 @@ import {
 } from "react-icons/fa";
 import { BsNintendoSwitch } from "react-icons/bs";
 import { css } from "../../../styled-system/css";
+import { contentReceipt } from "./style";
+import { Context } from "../../App";
 
 export interface GameProps {
   name: string;
@@ -30,6 +32,7 @@ export interface GameProps {
 
 const Content = () => {
   const [games, setGames] = useState<GameProps[]>([]);
+  const theme = useContext(Context);
 
   useEffect(() => {
     setGames([
@@ -92,17 +95,11 @@ const Content = () => {
   }, []);
 
   return (
-    <div
-      className={css({
-        display: "flex",
-        flexDirection: "column",
-      })}
-    >
+    <div className={contentReceipt({ visual: theme })}>
       <h1
         className={css({
           fontSize: "5xl",
           fontWeight: "bold",
-          color: "slate.100",
         })}
       >
         Games
