@@ -1,14 +1,11 @@
 import { cva } from "../../../styled-system/css";
+import { Stack, styled } from "../../../styled-system/jsx";
 
-export const cardReceipt = cva({
+const cardReceipt = cva({
   base: {
-    width: "sm",
-    height: "md",
-    display: "flex",
-    flexDirection: "column",
+    w: "sm",
+    mr: "4",
     borderRadius: "2xl",
-    marginRight: "4",
-    marginBottom: "4",
   },
   variants: {
     visual: {
@@ -23,3 +20,5 @@ export const cardReceipt = cva({
     },
   }
 })
+
+export const StyledCard = styled(Stack, cardReceipt)

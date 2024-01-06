@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { ElementType, useContext, useEffect, useState } from "react";
 import Filters from "../Filter";
 import Card from "../Card";
 import SouthParkTheStickOfTruth from "../../assets/south-park-the-stick-of-truth.png";
@@ -18,6 +18,7 @@ import { BsNintendoSwitch } from "react-icons/bs";
 import { css } from "../../../styled-system/css";
 import { contentReceipt } from "./style";
 import { Context } from "../../App";
+import { Wrap } from "../../../styled-system/jsx";
 
 export interface GameProps {
   name: string;
@@ -26,7 +27,7 @@ export interface GameProps {
   icon: string;
   plataforms: {
     plataformName: string;
-    plataformIcon: HTMLElement;
+    plataformIcon: ElementType;
   }[];
 }
 
@@ -105,17 +106,11 @@ const Content = () => {
         Games
       </h1>
       <Filters />
-      <div
-        className={css({
-          width: "1200px",
-          display: "flex",
-          flexWrap: "wrap",
-        })}
-      >
+      <Wrap>
         {games.map((game) => (
           <Card game={game} />
         ))}
-      </div>
+      </Wrap>
     </div>
   );
 };

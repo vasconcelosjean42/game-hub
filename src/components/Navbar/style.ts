@@ -1,15 +1,13 @@
 import { cva } from "../../../styled-system/css";
+import { HStack, styled } from "../../../styled-system/jsx";
 
-export const navbarReceipt = cva({
+const navbarReceipt = cva({
   base: {
-    width: "full",
-    height: "16",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    objectFit: "contain",
-    paddingX: "20",
-    paddingY: "2",
+    w: "full",
+    h: "16",
+    px: "16",
+    py: "2",
+    gap: "10",
   },
   variants: {
     visual: {
@@ -22,3 +20,5 @@ export const navbarReceipt = cva({
     },
   }
 })
+
+export const StyledNavbar = styled(HStack, navbarReceipt)
