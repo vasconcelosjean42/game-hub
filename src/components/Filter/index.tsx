@@ -1,59 +1,29 @@
-import { useContext, useEffect, useState } from "react";
-import { css } from "../../../styled-system/css";
-import { filterReceipt } from "./style";
-import { Context } from "../../App";
+import { useContext } from "react";
+import { StyledFilter } from "./style";
+import { Context } from "../../App.tsx";
+import { HStack } from "../../../styled-system/jsx/hstack";
+import { FilterProps } from "../Content/index.tsx";
 
-const Filters = () => {
-  const [plataforms, setPlataforms] = useState<string[]>([]);
-  const [orders, setOrders] = useState<string[]>([]);
+interface Props {
+  options: FilterProps;
+}
+
+const Filters = ({ options }: Props) => {
   const theme = useContext(Context);
-  useEffect(() => {
-    setPlataforms([
-      "Windows",
-      "Mac",
-      "Linux",
-      "PS4",
-      "Xbox",
-      "Nintendo",
-      "Android",
-      "iOS",
-    ]);
-
-    setOrders([
-      "Relevance",
-      "Date added",
-      "Name",
-      "Release date",
-      "Popularity",
-      "Average rating",
-    ]);
-  }, []);
 
   return (
-    <div className={css({ display: "flex", marginBottom: "6" })}>
-      <select
-        name="plataform"
-        id="plataform"
-        className={filterReceipt({ visual: theme, space: "m" })}
-      >
-        <option selected disabled hidden>
-          Plataform
-        </option>
-        {plataforms.map((plataform) => (
-          <option value={plataform}>{plataform}</option>
+    <HStack mb="6">
+      <StyledFilter name={options.name} id={options.id} visual={theme}>
+        {options.disableHiddenOption ? (
+          <option selected disabled hidden>
+            {options.disableHiddenOption}
+          </option>
+        ) : null}
+        {options.options.map((optionName) => (
+          <option value={optionName}>{optionName}</option>
         ))}
-      </select>
-      <select
-        name="order"
-        id="order"
-        defaultValue="Relevance"
-        className={filterReceipt({ visual: theme })}
-      >
-        {orders.map((order) => (
-          <option value={order}>Order by: {order}</option>
-        ))}
-      </select>
-    </div>
+      </StyledFilter>
+    </HStack>
   );
 };
 

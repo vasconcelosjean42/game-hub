@@ -3,7 +3,7 @@ import gameHubLogo from "../../assets/game-hub-logo.png";
 import gameHubLogoBlack from "../../assets/game-hub-logo-slate-900.png";
 import { StyledNavbar } from "./style";
 import { useContext } from "react";
-import { Context } from "../../App";
+import { Context } from "../../App.tsx";
 import Searcher from "../Searcher";
 
 interface Props {

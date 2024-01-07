@@ -1,25 +1,20 @@
 import { cva } from "../../../styled-system/css";
+import { styled } from "../../../styled-system/jsx";
 
-export const filterReceipt = cva({
-  base: {
-    padding: "2",
-    borderRadius: "lg",
-  },
+const filterReceipt = cva({
+  base: { borderRadius:"md", p: 2, fontWeight: "semibold"},
   variants: {
     visual: {
       light: {
         color: "slate.900",
-        backgroundColor: "slate.300",
+        bgColor: "slate.300",
       },
       dark: {
         color: "slate.100",
-        backgroundColor: "slate.900",
+        bgColor: "slate.900",
       }
     },
-    space: {
-      m: {
-        marginRight: "4"
-      }
-    }
   }
 })
+
+export const StyledFilter = styled('select', filterReceipt)

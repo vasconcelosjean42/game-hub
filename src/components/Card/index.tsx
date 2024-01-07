@@ -2,8 +2,9 @@ import { useContext } from "react";
 import { css } from "../../../styled-system/css";
 import { GameProps } from "../Content";
 import { StyledCard } from "./style";
-import { Context } from "../../App";
+import { Context } from "../../App.tsx";
 import { HStack, Stack } from "../../../styled-system/jsx";
+import { StyledH1, StyledH2 } from "../../App.ts";
 
 interface Props {
   game: GameProps;
@@ -37,7 +38,7 @@ const Card = ({ game }: Props) => {
             id="relevancia"
             className={css({
               color: "green.300",
-              bgColor: "rgba(51, 65, 85, 0.3)",
+              bgColor: "rgba(51, 65, 85, 0.4)",
               p: "1",
               paddingInline: "4",
               borderRadius: "sm",
@@ -47,10 +48,8 @@ const Card = ({ game }: Props) => {
             <p>{game.relevance}</p>
           </div>
         </HStack>
-        <h1 className={css({ fontSize: "5xl", fontWeight: "bold" })}>
-          {game.name}
-        </h1>
-        <h2 className={css({ fontSize: "4xl" })}>{game.icon}</h2>
+        <StyledH1>{game.name}</StyledH1>
+        <StyledH2>{game.icon}</StyledH2>
       </Stack>
     </StyledCard>
   );

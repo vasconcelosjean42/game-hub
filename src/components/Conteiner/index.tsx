@@ -2,7 +2,7 @@ import { conteinerReceipt } from "./style";
 import Content from "../Content";
 import Sidebar from "../Sidebar/Sidebar";
 import { useContext } from "react";
-import { Context } from "../../App";
+import { Context } from "../../App.tsx";
 
 const Conteiner = () => {
   const theme = useContext(Context);

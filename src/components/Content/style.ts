@@ -1,10 +1,7 @@
 import { cva } from "../../../styled-system/css";
+import { Stack, styled } from "../../../styled-system/jsx";
 
 export const contentReceipt = cva({
-  base: {
-    display: "flex",
-    flexDirection: "column",
-  },
   variants: {
     visual: {
       light: {
@@ -16,3 +13,5 @@ export const contentReceipt = cva({
     },
   }
 })
+
+export const StyledContent = styled(Stack, contentReceipt)

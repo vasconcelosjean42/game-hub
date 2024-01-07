@@ -12,10 +12,10 @@ const navbarReceipt = cva({
   variants: {
     visual: {
       light: {
-        backgroundColor: "slate.100",
+        bgColor: "slate.100",
       },
       dark: {
-        backgroundColor: "slate.700",
+        bgColor: "slate.700",
       }
     },
   }

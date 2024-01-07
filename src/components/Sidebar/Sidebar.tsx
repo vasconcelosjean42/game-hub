@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import Farcry3 from "../../assets/far-cry-3.jpg";
 import { css } from "../../../styled-system/css";
-import { Context } from "../../App";
+import { Context } from "../../App.tsx";
 import { sidebarReceipt } from "./style";
+import { StyledH2 } from "../../App.ts";
+import { hstack } from "../../../styled-system/patterns/hstack";
 
 const Sidebar = () => {
   const [genres, setGenres] = useState<string[]>([]);
@@ -14,24 +16,10 @@ const Sidebar = () => {
 
   return (
     <div className={sidebarReceipt({ visual: theme })}>
-      <h1
-        className={css({
-          fontSize: "2xl",
-          fontWeight: "bold",
-          marginBottom: "4",
-        })}
-      >
-        Genres
-      </h1>
+      <StyledH2>Genres</StyledH2>
       <ul>
         {genres.map((genre) => (
-          <li
-            className={css({
-              display: "flex",
-              alignItems: "center",
-              marginBottom: "4",
-            })}
-          >
+          <li className={hstack({ mb: "4" })}>
             <img
               src={Farcry3}
               className={css({

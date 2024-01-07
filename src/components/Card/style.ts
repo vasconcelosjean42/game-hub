@@ -11,11 +11,11 @@ const cardReceipt = cva({
     visual: {
       light: {
         color: "slate.900",
-        backgroundColor: "slate.300",
+        bgColor: "slate.300",
       },
       dark: {
         color: "slate.100",
-        backgroundColor: "slate.900",
+        bgColor: "slate.900",
       }
     },
   }

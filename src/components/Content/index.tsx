@@ -1,4 +1,4 @@
-import React, { ElementType, useContext, useEffect, useState } from "react";
+import { ElementType, useContext, useEffect, useState } from "react";
 import Filters from "../Filter";
 import Card from "../Card";
 import SouthParkTheStickOfTruth from "../../assets/south-park-the-stick-of-truth.png";
@@ -15,10 +15,10 @@ import {
   FaAndroid,
 } from "react-icons/fa";
 import { BsNintendoSwitch } from "react-icons/bs";
-import { css } from "../../../styled-system/css";
-import { contentReceipt } from "./style";
-import { Context } from "../../App";
-import { Wrap } from "../../../styled-system/jsx";
+import { StyledContent } from "./style";
+import { Context } from "../../App.tsx";
+import { HStack, Wrap } from "../../../styled-system/jsx";
+import { StyledH1 } from "../../App.ts";
 
 export interface GameProps {
   name: string;
@@ -31,8 +31,17 @@ export interface GameProps {
   }[];
 }
 
+export interface FilterProps {
+  id: string;
+  name: string;
+  disableHiddenOption?: string;
+  options: string[];
+}
+
 const Content = () => {
   const [games, setGames] = useState<GameProps[]>([]);
+  const [plataforms, setPlataforms] = useState<FilterProps>();
+  const [orders, setOrders] = useState<FilterProps>();
   const theme = useContext(Context);
 
   useEffect(() => {
@@ -93,25 +102,48 @@ const Content = () => {
         ],
       },
     ]);
+    setPlataforms({
+      id: "plataform",
+      name: "plataform",
+      disableHiddenOption: "Plataforms",
+      options: [
+        "Windows",
+        "Mac",
+        "Linux",
+        "PS4",
+        "Xbox",
+        "Nintendo",
+        "Android",
+        "iOS",
+      ],
+    });
+    setOrders({
+      id: "orders",
+      name: "orders",
+      options: [
+        "Relevance",
+        "Date added",
+        "Name",
+        "Release date",
+        "Popularity",
+        "Average rating",
+      ],
+    });
   }, []);
 
   return (
-    <div className={contentReceipt({ visual: theme })}>
-      <h1
-        className={css({
-          fontSize: "5xl",
-          fontWeight: "bold",
-        })}
-      >
-        Games
-      </h1>
-      <Filters />
+    <StyledContent visual={theme}>
+      <StyledH1>Games</StyledH1>
+      <HStack>
+        {plataforms ? <Filters options={plataforms} /> : null}
+        {orders ? <Filters options={orders} /> : null}
+      </HStack>
       <Wrap>
         {games.map((game) => (
           <Card game={game} />
         ))}
       </Wrap>
-    </div>
+    </StyledContent>
   );
 };
 
