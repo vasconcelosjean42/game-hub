@@ -4,17 +4,17 @@ import { GameProps } from "../Content";
 import { StyledCard } from "./style";
 import { Context } from "../../App.tsx";
 import { HStack, Stack } from "../../../styled-system/jsx";
-import { StyledH1, StyledH2 } from "../../App.ts";
+import { StyledText } from "../../App.ts";
 
 interface Props {
   game: GameProps;
 }
 
 const Card = ({ game }: Props) => {
-  const theme = useContext(Context);
+  const context = useContext(Context);
 
   return (
-    <StyledCard visual={theme}>
+    <StyledCard visual={context?.theme}>
       <Stack>
         <img
           src={game.image}
@@ -48,8 +48,8 @@ const Card = ({ game }: Props) => {
             <p>{game.relevance}</p>
           </div>
         </HStack>
-        <StyledH1>{game.name}</StyledH1>
-        <StyledH2>{game.icon}</StyledH2>
+        <StyledText size="h1">{game.name}</StyledText>
+        <StyledText size="h2">{game.icon}</StyledText>
       </Stack>
     </StyledCard>
   );

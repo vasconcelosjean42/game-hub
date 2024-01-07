@@ -11,18 +11,18 @@ interface Props {
 }
 
 const Navbar = ({ setTheme }: Props) => {
-  const theme = useContext(Context);
+  const context = useContext(Context);
   return (
-    <StyledNavbar visual={theme}>
+    <StyledNavbar visual={context?.theme}>
       <img
         className={css({ height: "100%" })}
-        src={theme === "dark" ? gameHubLogo : gameHubLogoBlack}
+        src={context?.theme === "dark" ? gameHubLogo : gameHubLogoBlack}
       />
       <Searcher />
       <label>
         <input
           type="checkbox"
-          checked={theme === "dark"}
+          checked={context?.theme === "dark"}
           onChange={setTheme}
         ></input>
         <span>Dark Mode</span>

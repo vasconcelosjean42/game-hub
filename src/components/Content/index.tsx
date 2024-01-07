@@ -18,7 +18,7 @@ import { BsNintendoSwitch } from "react-icons/bs";
 import { StyledContent } from "./style";
 import { Context } from "../../App.tsx";
 import { HStack, Wrap } from "../../../styled-system/jsx";
-import { StyledH1 } from "../../App.ts";
+import { StyledText } from "../../App.ts";
 
 export interface GameProps {
   name: string;
@@ -42,7 +42,7 @@ const Content = () => {
   const [games, setGames] = useState<GameProps[]>([]);
   const [plataforms, setPlataforms] = useState<FilterProps>();
   const [orders, setOrders] = useState<FilterProps>();
-  const theme = useContext(Context);
+  const context = useContext(Context);
 
   useEffect(() => {
     setGames([
@@ -132,8 +132,8 @@ const Content = () => {
   }, []);
 
   return (
-    <StyledContent visual={theme}>
-      <StyledH1>Games</StyledH1>
+    <StyledContent visual={context?.theme}>
+      <StyledText size="h1">Games</StyledText>
       <HStack>
         {plataforms ? <Filters options={plataforms} /> : null}
         {orders ? <Filters options={orders} /> : null}

@@ -1,20 +1,38 @@
 import { cva } from "../styled-system/css"
-import { styled } from "../styled-system/jsx"
+import { Stack, styled } from "../styled-system/jsx"
     
-const textH1Receipt = cva({
-  base:{
-    fontSize: "5xl",
-    fontWeight: "bold"
+const textReceipt = cva({
+  variants:{
+    size: {
+      h1: {
+        fontSize: "5xl",
+        fontWeight: "bold"
+      },
+      h2: {
+        fontSize: "3xl",
+        fontWeight: "semibold",
+      }
+    }
   }
 })
 
-const textH2Receipt = cva({
-  base:{
-    fontSize: "3xl",
-    fontWeight: "semibold",
+const appReceipt = cva({
+  base: {
+    flexDirection: "row",
+    padding: "8",
+  },
+  variants: {
+    visual: {
+      light: {
+        backgroundColor: "slate.100"
+      },
+      dark: {
+        backgroundColor: "slate.950"
+      }
+    },
   }
 })
 
-export const StyledH1 = styled('h1', textH1Receipt)
+export const StyledText = styled('p', textReceipt)
 
-export const StyledH2 = styled('h2', textH2Receipt)
+export const StyledApp = styled(Stack, appReceipt)

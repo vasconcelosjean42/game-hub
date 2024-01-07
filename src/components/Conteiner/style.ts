@@ -1,8 +1,8 @@
 import { cva } from "../../../styled-system/css";
+import { Stack, styled } from "../../../styled-system/jsx";
 
-export const conteinerReceipt = cva({
+const conteinerReceipt = cva({
   base: {
-    display: "flex",
     flexDirection: "row",
     padding: "8",
   },
@@ -17,3 +17,5 @@ export const conteinerReceipt = cva({
     },
   }
 })
+
+export const StyledConteiner = styled(Stack, conteinerReceipt)

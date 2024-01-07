@@ -5,6 +5,7 @@ const searchReceipt= cva({
   base: {
     h: "8",
     px: "2",
+    mx: "10",
     borderRadius: "lg",
     flex: 1,
   },

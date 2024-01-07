@@ -1,31 +1,34 @@
-import { createContext, useState } from "react";
-import { css } from "../styled-system/css";
-import Conteiner from "./components/Conteiner";
+import { Dispatch, SetStateAction, createContext, useState } from "react";
 import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Content from "./components/Content";
+import { StyledApp } from "./App.ts";
+import { Stack } from "../styled-system/jsx/stack";
 
-export const Context = createContext<"light" | "dark" | undefined>(undefined);
+interface ContextProps {
+  theme: "light" | "dark";
+  setSearch: Dispatch<SetStateAction<string>>;
+}
+
+export const Context = createContext<ContextProps | undefined>(undefined);
 
 const App = () => {
-  const [theme, setTheme] = useState<"light" | "dark" | undefined>("dark");
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [search, setSearch] = useState<string>("");
 
   return (
-    <Context.Provider value={theme}>
-      <div
-        className={css({
-          width: "full",
-          height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-        })}
-      >
+    <Context.Provider value={{ theme, setSearch }}>
+      <Stack gap={0}>
         <Navbar
           setTheme={() => {
             setTheme((prevState) => (prevState === "dark" ? "light" : "dark"));
-            console.log(theme);
           }}
-        ></Navbar>
-        <Conteiner></Conteiner>
-      </div>
+        />
+        <StyledApp visual={theme}>
+          <Sidebar></Sidebar>
+          <Content></Content>
+        </StyledApp>
+      </Stack>
     </Context.Provider>
   );
 };

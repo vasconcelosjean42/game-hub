@@ -1,36 +1,72 @@
 import { useContext, useEffect, useState } from "react";
-import Farcry3 from "../../assets/far-cry-3.jpg";
+import Action from "../../assets/gender-action.jpg";
+import Indie from "../../assets/gender-indie.jpg";
+import Adventure from "../../assets/gender-adventure.jpg";
+import RPG from "../../assets/gender-rpg.jpg";
+import Strategy from "../../assets/gender-strategy.jpg";
+import Shooter from "../../assets/gender-shooter.jpeg";
 import { css } from "../../../styled-system/css";
 import { Context } from "../../App.tsx";
 import { sidebarReceipt } from "./style";
-import { StyledH2 } from "../../App.ts";
+import { StyledText } from "../../App.ts";
 import { hstack } from "../../../styled-system/patterns/hstack";
 
+interface ImageProps {
+  name: string;
+  image: string;
+}
+
 const Sidebar = () => {
-  const [genres, setGenres] = useState<string[]>([]);
-  const theme = useContext(Context);
+  const [genres, setGenres] = useState<ImageProps[]>([]);
+  const context = useContext(Context);
 
   useEffect(() => {
-    setGenres(["Action", "Indie", "Adventure", "RPG", "Strategy", "Shooter"]);
+    setGenres([
+      {
+        name: "Action",
+        image: Action,
+      },
+      {
+        name: "Indie",
+        image: Indie,
+      },
+      {
+        name: "Adventure",
+        image: Adventure,
+      },
+      {
+        name: "RPG",
+        image: RPG,
+      },
+      {
+        name: "Strategy",
+        image: Strategy,
+      },
+      {
+        name: "Shooter",
+        image: Shooter,
+      },
+    ]);
   }, []);
 
   return (
-    <div className={sidebarReceipt({ visual: theme })}>
-      <StyledH2>Genres</StyledH2>
+    <div className={sidebarReceipt({ visual: context?.theme })}>
+      <StyledText size="h2" mb={4}>
+        Genres
+      </StyledText>
       <ul>
         {genres.map((genre) => (
           <li className={hstack({ mb: "4" })}>
             <img
-              src={Farcry3}
+              src={genre.image}
               className={css({
                 width: "12",
                 height: "12",
                 objectFit: "cover",
                 borderRadius: "2xl",
-                marginRight: "2",
               })}
             />
-            <span className={css({ fontSize: "large" })}>{genre}</span>
+            <StyledText>{genre.name}</StyledText>
           </li>
         ))}
       </ul>

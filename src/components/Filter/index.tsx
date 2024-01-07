@@ -9,11 +9,11 @@ interface Props {
 }
 
 const Filters = ({ options }: Props) => {
-  const theme = useContext(Context);
+  const context = useContext(Context);
 
   return (
     <HStack mb="6">
-      <StyledFilter name={options.name} id={options.id} visual={theme}>
+      <StyledFilter name={options.name} id={options.id} visual={context?.theme}>
         {options.disableHiddenOption ? (
           <option selected disabled hidden>
             {options.disableHiddenOption}
