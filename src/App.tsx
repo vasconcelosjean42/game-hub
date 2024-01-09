@@ -7,6 +7,7 @@ import { Stack } from "../styled-system/jsx/stack";
 
 interface ContextProps {
   theme: "light" | "dark";
+  search: string;
   setSearch: Dispatch<SetStateAction<string>>;
 }
 
@@ -17,14 +18,14 @@ const App = () => {
   const [search, setSearch] = useState<string>("");
 
   return (
-    <Context.Provider value={{ theme, setSearch }}>
-      <Stack gap={0}>
+    <Context.Provider value={{ theme, search, setSearch }}>
+      <Stack gap={0} height="100vh">
         <Navbar
           setTheme={() => {
             setTheme((prevState) => (prevState === "dark" ? "light" : "dark"));
           }}
         />
-        <StyledApp visual={theme}>
+        <StyledApp visual={theme} height="full">
           <Sidebar></Sidebar>
           <Content></Content>
         </StyledApp>

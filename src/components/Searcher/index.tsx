@@ -18,6 +18,7 @@ const Searcher = () => {
           outlineWidth: "0",
         })}
         type="search"
+        onChange={(e) => context?.setSearch(e.target.value)}
         placeholder="Search games..."
       />
     </StyledSearch>

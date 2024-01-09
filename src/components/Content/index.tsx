@@ -1,4 +1,4 @@
-import { ElementType, useContext, useEffect, useState } from "react";
+import { ElementType, ReactNode, useContext, useEffect, useState } from "react";
 import Filters from "../Filter";
 import Card from "../Card";
 import SouthParkTheStickOfTruth from "../../assets/south-park-the-stick-of-truth.png";
@@ -36,13 +36,32 @@ export interface FilterProps {
   name: string;
   disableHiddenOption?: string;
   options: string[];
+  children?: ReactNode;
 }
 
 const Content = () => {
   const [games, setGames] = useState<GameProps[]>([]);
   const [plataforms, setPlataforms] = useState<FilterProps>();
   const [orders, setOrders] = useState<FilterProps>();
+  const [orderBy, setOrderBy] = useState<string>("");
   const context = useContext(Context);
+
+  const filteredGames = context?.search
+    ? games.filter((game) =>
+        game.name
+          .toLocaleLowerCase()
+          .includes(context.search.toLocaleLowerCase())
+      )
+    : games;
+
+  const orderedBy = (a: GameProps, b: GameProps) => {
+    if (orderBy === "Relevance") {
+      return b.relevance - a.relevance;
+    } else if (orderBy === "Popularity") {
+      return b.plataforms.length - a.plataforms.length;
+    }
+    return b.relevance - a.relevance;
+  };
 
   useEffect(() => {
     setGames([
@@ -81,8 +100,11 @@ const Content = () => {
         icon: "🎯",
         plataforms: [
           { plataformName: "Windows", plataformIcon: FaWindows },
+          { plataformName: "Mac", plataformIcon: FaApple },
           { plataformName: "Linux", plataformIcon: FaLinux },
           { plataformName: "PS4", plataformIcon: FaPlaystation },
+          { plataformName: "Xbox", plataformIcon: FaXbox },
+          { plataformName: "Nintendo", plataformIcon: FaAndroid },
           { plataformName: "Android", plataformIcon: BsNintendoSwitch },
         ],
       },
@@ -93,11 +115,8 @@ const Content = () => {
         icon: "🎲",
         plataforms: [
           { plataformName: "Windows", plataformIcon: FaWindows },
-          { plataformName: "Mac", plataformIcon: FaApple },
           { plataformName: "Linux", plataformIcon: FaLinux },
           { plataformName: "PS4", plataformIcon: FaPlaystation },
-          { plataformName: "Xbox", plataformIcon: FaXbox },
-          { plataformName: "Nintendo", plataformIcon: FaAndroid },
           { plataformName: "Android", plataformIcon: BsNintendoSwitch },
         ],
       },
@@ -128,6 +147,7 @@ const Content = () => {
         "Popularity",
         "Average rating",
       ],
+      children: "Order by: ",
     });
   }, []);
 
@@ -135,13 +155,17 @@ const Content = () => {
     <StyledContent visual={context?.theme}>
       <StyledText size="h1">Games</StyledText>
       <HStack>
-        {plataforms ? <Filters options={plataforms} /> : null}
+        {plataforms ? (
+          <Filters options={plataforms} setOrderBy={setOrderBy} />
+        ) : null}
         {orders ? <Filters options={orders} /> : null}
       </HStack>
       <Wrap>
-        {games.map((game) => (
-          <Card game={game} />
-        ))}
+        {filteredGames.length !== 0 ? (
+          filteredGames.sort(orderedBy).map((game) => <Card game={game} />)
+        ) : (
+          <StyledText size={"h2"}>No content found</StyledText>
+        )}
       </Wrap>
     </StyledContent>
   );
