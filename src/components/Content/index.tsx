@@ -26,6 +26,8 @@ export interface GameProps {
   relevance: number;
   icon: string;
   releaseDate: Date;
+  dateAdded: Date;
+  genres: string;
   plataforms: {
     plataformName: string;
     plataformIcon: ElementType;
@@ -62,6 +64,12 @@ const Content = () => {
   const orderedBy = (a: GameProps, b: GameProps) => {
     if (orderBy === "Relevance") {
       return b.relevance - a.relevance;
+    } else if (orderBy === "Date added") {
+      const dateA = a.dateAdded;
+      const dateB = b.dateAdded;
+      if (dateA < dateB) return -1;
+      if (dateB > dateA) return 1;
+      return 0;
     } else if (orderBy === "Name") {
       const nameA = a.name.toUpperCase();
       const nameB = b.name.toUpperCase();
@@ -88,6 +96,8 @@ const Content = () => {
         relevance: 92,
         icon: "🎯",
         releaseDate: new Date(2010, 10, 4),
+        dateAdded: new Date(Date.now()),
+        genres: "RPG",
         plataforms: [
           { plataformName: "Windows", plataformIcon: FaWindows },
           { plataformName: "Mac", plataformIcon: FaApple },
@@ -104,6 +114,8 @@ const Content = () => {
         relevance: 90,
         icon: "🎯",
         releaseDate: new Date(2010, 10, 2),
+        dateAdded: new Date(Date.now()),
+        genres: "Action",
         plataforms: [
           { plataformName: "Windows", plataformIcon: FaWindows },
           { plataformName: "Linux", plataformIcon: FaLinux },
@@ -118,6 +130,8 @@ const Content = () => {
         relevance: 89,
         icon: "🎯",
         releaseDate: new Date(2010, 10, 1),
+        dateAdded: new Date(Date.now()),
+        genres: "Shooter",
         plataforms: [
           { plataformName: "Windows", plataformIcon: FaWindows },
           { plataformName: "Mac", plataformIcon: FaApple },
@@ -134,6 +148,8 @@ const Content = () => {
         relevance: 99,
         icon: "🎲",
         releaseDate: new Date(2010, 10, 3),
+        dateAdded: new Date(Date.now()),
+        genres: "RPG",
         plataforms: [
           { plataformName: "Windows", plataformIcon: FaWindows },
           { plataformName: "Linux", plataformIcon: FaLinux },
