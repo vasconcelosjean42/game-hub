@@ -25,6 +25,7 @@ export interface GameProps {
   image: string;
   relevance: number;
   icon: string;
+  releaseDate: Date;
   plataforms: {
     plataformName: string;
     plataformIcon: ElementType;
@@ -46,6 +47,10 @@ const Content = () => {
   const [orderBy, setOrderBy] = useState<string>("");
   const context = useContext(Context);
 
+  const handleOrder = (value: string) => {
+    setOrderBy(value);
+  };
+
   const filteredGames = context?.search
     ? games.filter((game) =>
         game.name
@@ -57,6 +62,18 @@ const Content = () => {
   const orderedBy = (a: GameProps, b: GameProps) => {
     if (orderBy === "Relevance") {
       return b.relevance - a.relevance;
+    } else if (orderBy === "Name") {
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      if (nameA < nameB) return -1;
+      if (nameB > nameA) return 1;
+      return 0;
+    } else if (orderBy === "Release date") {
+      const dateA = a.releaseDate;
+      const dateB = b.releaseDate;
+      if (dateA < dateB) return -1;
+      if (dateB > dateA) return 1;
+      return 0;
     } else if (orderBy === "Popularity") {
       return b.plataforms.length - a.plataforms.length;
     }
@@ -70,6 +87,7 @@ const Content = () => {
         image: SouthParkTheStickOfTruth,
         relevance: 92,
         icon: "🎯",
+        releaseDate: new Date(2010, 10, 4),
         plataforms: [
           { plataformName: "Windows", plataformIcon: FaWindows },
           { plataformName: "Mac", plataformIcon: FaApple },
@@ -85,6 +103,7 @@ const Content = () => {
         image: FarCry,
         relevance: 90,
         icon: "🎯",
+        releaseDate: new Date(2010, 10, 2),
         plataforms: [
           { plataformName: "Windows", plataformIcon: FaWindows },
           { plataformName: "Linux", plataformIcon: FaLinux },
@@ -98,6 +117,7 @@ const Content = () => {
         image: CallOfDuty,
         relevance: 89,
         icon: "🎯",
+        releaseDate: new Date(2010, 10, 1),
         plataforms: [
           { plataformName: "Windows", plataformIcon: FaWindows },
           { plataformName: "Mac", plataformIcon: FaApple },
@@ -113,6 +133,7 @@ const Content = () => {
         image: BaldursGate,
         relevance: 99,
         icon: "🎲",
+        releaseDate: new Date(2010, 10, 3),
         plataforms: [
           { plataformName: "Windows", plataformIcon: FaWindows },
           { plataformName: "Linux", plataformIcon: FaLinux },
@@ -156,9 +177,9 @@ const Content = () => {
       <StyledText size="h1">Games</StyledText>
       <HStack>
         {plataforms ? (
-          <Filters options={plataforms} setOrderBy={setOrderBy} />
+          <Filters options={plataforms} setOrderBy={handleOrder} />
         ) : null}
-        {orders ? <Filters options={orders} /> : null}
+        {orders ? <Filters options={orders} setOrderBy={handleOrder} /> : null}
       </HStack>
       <Wrap>
         {filteredGames.length !== 0 ? (

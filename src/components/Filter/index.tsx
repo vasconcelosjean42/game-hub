@@ -18,10 +18,7 @@ const Filters = ({ options, setOrderBy }: Props) => {
         name={options.name}
         id={options.id}
         visual={context?.theme}
-        onChange={(e) => {
-          console.log(e.target.value);
-          setOrderBy(e.target.value);
-        }}
+        onChange={(e) => setOrderBy(e.target.value)}
       >
         {options.disableHiddenOption ? (
           <option selected disabled hidden>
