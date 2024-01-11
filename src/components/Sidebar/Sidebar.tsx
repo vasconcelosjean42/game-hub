@@ -56,7 +56,10 @@ const Sidebar = () => {
       </StyledText>
       <ul>
         {genres.map((genre) => (
-          <li className={hstack({ mb: "4" })}>
+          <li
+            className={hstack({ mb: "4", cursor: "pointer" })}
+            onClick={() => console.log(genre.name)}
+          >
             <img
               src={genre.image}
               className={css({

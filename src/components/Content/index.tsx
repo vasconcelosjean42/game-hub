@@ -47,19 +47,25 @@ const Content = () => {
   const [plataforms, setPlataforms] = useState<FilterProps>();
   const [orders, setOrders] = useState<FilterProps>();
   const [orderBy, setOrderBy] = useState<string>("");
+  const [genres, setGenres] = useState<string>("Action");
   const context = useContext(Context);
 
   const handleOrder = (value: string) => {
     setOrderBy(value);
   };
 
-  const filteredGames = context?.search
-    ? games.filter((game) =>
+  const searchedGames = (): GameProps[] => {
+    if (context?.search) {
+      setGenres("");
+      return games.filter((game) =>
         game.name
           .toLocaleLowerCase()
           .includes(context.search.toLocaleLowerCase())
-      )
-    : games;
+      );
+    } else {
+      return games;
+    }
+  };
 
   const orderedBy = (a: GameProps, b: GameProps) => {
     if (orderBy === "Relevance") {
@@ -198,8 +204,10 @@ const Content = () => {
         {orders ? <Filters options={orders} setOrderBy={handleOrder} /> : null}
       </HStack>
       <Wrap>
-        {filteredGames.length !== 0 ? (
-          filteredGames.sort(orderedBy).map((game) => <Card game={game} />)
+        {searchedGames().length !== 0 ? (
+          searchedGames()
+            .sort(orderedBy)
+            .map((game) => <Card game={game} />)
         ) : (
           <StyledText size={"h2"}>No content found</StyledText>
         )}
