@@ -16,6 +16,7 @@ export const Context = createContext<ContextProps | undefined>(undefined);
 const App = () => {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [search, setSearch] = useState<string>("");
+  const [genre, setGenre] = useState<string>("");
 
   return (
     <Context.Provider value={{ theme, search, setSearch }}>
@@ -26,8 +27,8 @@ const App = () => {
           }}
         />
         <StyledApp visual={theme} height="full">
-          <Sidebar></Sidebar>
-          <Content></Content>
+          <Sidebar genreName={genre} handleGenres={setGenre}></Sidebar>
+          <Content genreName={genre} handleGenre={setGenre}></Content>
         </StyledApp>
       </Stack>
     </Context.Provider>

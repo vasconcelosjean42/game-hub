@@ -42,12 +42,18 @@ export interface FilterProps {
   children?: ReactNode;
 }
 
-const Content = () => {
+interface Props {
+  genreName: string;
+  handleGenre: (name: string) => void;
+}
+
+const Content = ({ genreName, handleGenre }: Props) => {
   const [games, setGames] = useState<GameProps[]>([]);
+  //const [gamesList, setGamesList] = useState<GameProps[]>([]);
   const [plataforms, setPlataforms] = useState<FilterProps>();
   const [orders, setOrders] = useState<FilterProps>();
   const [orderBy, setOrderBy] = useState<string>("");
-  const [genres, setGenres] = useState<string>("Action");
+  const [filterPlataform, setFilterPlataform] = useState<string>("");
   const context = useContext(Context);
 
   const handleOrder = (value: string) => {
@@ -56,11 +62,19 @@ const Content = () => {
 
   const searchedGames = (): GameProps[] => {
     if (context?.search) {
-      setGenres("");
+      handleGenre("");
       return games.filter((game) =>
         game.name
           .toLocaleLowerCase()
           .includes(context.search.toLocaleLowerCase())
+      );
+    } else if (genreName) {
+      return games.filter((game) => game.genres === genreName);
+    } else if (filterPlataform) {
+      return games.filter((game) =>
+        game.plataforms.some(
+          (plataform) => plataform.plataformName === filterPlataform
+        )
       );
     } else {
       return games;
@@ -199,7 +213,7 @@ const Content = () => {
       <StyledText size="h1">Games</StyledText>
       <HStack>
         {plataforms ? (
-          <Filters options={plataforms} setOrderBy={handleOrder} />
+          <Filters options={plataforms} setOrderBy={setFilterPlataform} />
         ) : null}
         {orders ? <Filters options={orders} setOrderBy={handleOrder} /> : null}
       </HStack>
@@ -207,7 +221,7 @@ const Content = () => {
         {searchedGames().length !== 0 ? (
           searchedGames()
             .sort(orderedBy)
-            .map((game) => <Card game={game} />)
+            .map((game) => <Card game={game} key={game.name} />)
         ) : (
           <StyledText size={"h2"}>No content found</StyledText>
         )}

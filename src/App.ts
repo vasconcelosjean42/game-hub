@@ -12,6 +12,11 @@ const textReceipt = cva({
         fontSize: "3xl",
         fontWeight: "semibold",
       }
+    },
+    weight: {
+      b: {
+        fontWeight: "bold"
+      }
     }
   }
 })

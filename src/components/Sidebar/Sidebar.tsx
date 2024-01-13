@@ -16,7 +16,12 @@ interface ImageProps {
   image: string;
 }
 
-const Sidebar = () => {
+interface Props {
+  genreName: string;
+  handleGenres: (name: string) => void;
+}
+
+const Sidebar = ({ handleGenres, genreName }: Props) => {
   const [genres, setGenres] = useState<ImageProps[]>([]);
   const context = useContext(Context);
 
@@ -58,7 +63,11 @@ const Sidebar = () => {
         {genres.map((genre) => (
           <li
             className={hstack({ mb: "4", cursor: "pointer" })}
-            onClick={() => console.log(genre.name)}
+            onClick={() => {
+              genre.name === genreName
+                ? handleGenres("")
+                : handleGenres(genre.name);
+            }}
           >
             <img
               src={genre.image}
@@ -69,7 +78,9 @@ const Sidebar = () => {
                 borderRadius: "2xl",
               })}
             />
-            <StyledText>{genre.name}</StyledText>
+            <StyledText weight={genre.name === genreName ? "b" : undefined}>
+              {genre.name}
+            </StyledText>
           </li>
         ))}
       </ul>
