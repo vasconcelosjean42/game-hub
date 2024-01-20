@@ -25,7 +25,7 @@ export interface GameProps {
   id: string;
   name: string;
   metacritic: number;
-  background_imag: string;
+  background_image: string;
   icon: string;
   released: Date;
   updated: Date;
@@ -33,8 +33,8 @@ export interface GameProps {
     id: number;
     name: string;
   };
-  plataforms: {
-    plataform: {
+  platforms: {
+    platform: {
       id: number;
       name: string;
     };
@@ -79,8 +79,8 @@ const Content = ({ genreName, handleGenre }: Props) => {
       return games.filter((game) => game.genres.name === genreName);
     } else if (filterPlataform) {
       return games.filter((game) =>
-        game.plataforms.some(
-          (plataform) => plataform.plataform.name === filterPlataform
+        game.platforms.some(
+          (platform) => platform.platform.name === filterPlataform
         )
       );
     } else {
@@ -110,7 +110,7 @@ const Content = ({ genreName, handleGenre }: Props) => {
       if (dateB > dateA) return 1;
       return 0;
     } else if (orderBy === "Popularity") {
-      return b.plataforms.length - a.plataforms.length;
+      return b.platforms.length - a.platforms.length;
     }
     return b.metacritic - a.metacritic;
   };
@@ -220,7 +220,10 @@ const Content = ({ genreName, handleGenre }: Props) => {
       .then(({ data }) => {
         return data.results;
       })
-      .then((results: GameProps[]) => setGames(results));
+      .then((results: GameProps[]) => {
+        console.log(results);
+        setGames(results);
+      });
     setPlataforms({
       id: "plataform",
       name: "plataform",
@@ -261,6 +264,7 @@ const Content = ({ genreName, handleGenre }: Props) => {
         {orders ? <Filters options={orders} setOrderBy={handleOrder} /> : null}
       </HStack>
       <Wrap>
+        {games.length > 0 ? <p>{games[0].name}</p> : null}
         {searchedGames().length !== 0 ? (
           searchedGames()
             .sort(orderedBy)

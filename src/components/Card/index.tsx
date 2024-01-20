@@ -12,12 +12,11 @@ interface Props {
 
 const Card = ({ game }: Props) => {
   const context = useContext(Context);
-
   return (
     <StyledCard visual={context?.theme}>
       <Stack>
         <img
-          src={game.background_imag}
+          src={game.background_image}
           className={css({
             w: "full",
             h: "60",
@@ -30,9 +29,9 @@ const Card = ({ game }: Props) => {
       <Stack p="4">
         <HStack justifyContent="space-between">
           <HStack fontSize="2xl" gap="2" color="slate.500">
-            {game.plataforms.map((plataform) => (
-              <plataform.plataform.name />
-            ))}
+            {/* {game.platforms.map((plataform) => (
+              <plataform.platform.name />
+            ))} */}
           </HStack>
           <div
             id="relevancia"
