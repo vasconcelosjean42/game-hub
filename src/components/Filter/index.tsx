@@ -21,12 +21,12 @@ const Filters = ({ options, setOrderBy }: Props) => {
         onChange={(e) => setOrderBy(e.target.value)}
       >
         {options.disableHiddenOption ? (
-          <option selected disabled hidden>
+          <option disabled hidden defaultValue={""}>
             {options.disableHiddenOption}
           </option>
         ) : null}
         {options.options.map((optionName) => (
-          <option value={optionName}>
+          <option key={optionName} defaultValue={optionName}>
             {options.children}
             {optionName}
           </option>

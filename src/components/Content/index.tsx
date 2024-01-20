@@ -1,4 +1,4 @@
-import { ElementType, ReactNode, useContext, useEffect, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import Filters from "../Filter";
 import Card from "../Card";
 // import SouthParkTheStickOfTruth from "../../assets/south-park-the-stick-of-truth.png";
@@ -22,16 +22,22 @@ import { HStack, Wrap } from "../../../styled-system/jsx";
 import { StyledText } from "../../App.ts";
 
 export interface GameProps {
+  id: string;
   name: string;
-  image: string;
-  relevance: number;
+  metacritic: number;
+  background_imag: string;
   icon: string;
-  releaseDate: Date;
-  dateAdded: Date;
-  genres: string;
+  released: Date;
+  updated: Date;
+  genres: {
+    id: number;
+    name: string;
+  };
   plataforms: {
-    plataformName: string;
-    plataformIcon: ElementType;
+    plataform: {
+      id: number;
+      name: string;
+    };
   }[];
 }
 
@@ -70,11 +76,11 @@ const Content = ({ genreName, handleGenre }: Props) => {
           .includes(context.search.toLocaleLowerCase())
       );
     } else if (genreName) {
-      return games.filter((game) => game.genres === genreName);
+      return games.filter((game) => game.genres.name === genreName);
     } else if (filterPlataform) {
       return games.filter((game) =>
         game.plataforms.some(
-          (plataform) => plataform.plataformName === filterPlataform
+          (plataform) => plataform.plataform.name === filterPlataform
         )
       );
     } else {
@@ -84,10 +90,10 @@ const Content = ({ genreName, handleGenre }: Props) => {
 
   const orderedBy = (a: GameProps, b: GameProps) => {
     if (orderBy === "Relevance") {
-      return b.relevance - a.relevance;
+      return b.metacritic - a.metacritic;
     } else if (orderBy === "Date added") {
-      const dateA = a.dateAdded;
-      const dateB = b.dateAdded;
+      const dateA = a.updated;
+      const dateB = b.updated;
       if (dateA < dateB) return -1;
       if (dateB > dateA) return 1;
       return 0;
@@ -98,15 +104,15 @@ const Content = ({ genreName, handleGenre }: Props) => {
       if (nameB > nameA) return 1;
       return 0;
     } else if (orderBy === "Release date") {
-      const dateA = a.releaseDate;
-      const dateB = b.releaseDate;
+      const dateA = a.released;
+      const dateB = b.released;
       if (dateA < dateB) return -1;
       if (dateB > dateA) return 1;
       return 0;
     } else if (orderBy === "Popularity") {
       return b.plataforms.length - a.plataforms.length;
     }
-    return b.relevance - a.relevance;
+    return b.metacritic - a.metacritic;
   };
 
   // useEffect(() => {
@@ -210,9 +216,39 @@ const Content = ({ genreName, handleGenre }: Props) => {
   // }, []);
 
   useEffect(() => {
-    ApiClient.get<{ name: string[] }>("/games").then((res) =>
-      console.log(res.data.results)
-    );
+    ApiClient.get("/games")
+      .then(({ data }) => {
+        return data.results;
+      })
+      .then((results: GameProps[]) => setGames(results));
+    setPlataforms({
+      id: "plataform",
+      name: "plataform",
+      disableHiddenOption: "Plataforms",
+      options: [
+        "Windows",
+        "Mac",
+        "Linux",
+        "PS4",
+        "Xbox",
+        "Nintendo",
+        "Android",
+        "iOS",
+      ],
+    });
+    setOrders({
+      id: "orders",
+      name: "orders",
+      options: [
+        "Relevance",
+        "Date added",
+        "Name",
+        "Release date",
+        "Popularity",
+        "Average rating",
+      ],
+      children: "Order by: ",
+    });
   }, []);
 
   return (

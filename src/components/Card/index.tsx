@@ -17,7 +17,7 @@ const Card = ({ game }: Props) => {
     <StyledCard visual={context?.theme}>
       <Stack>
         <img
-          src={game.image}
+          src={game.background_imag}
           className={css({
             w: "full",
             h: "60",
@@ -31,7 +31,7 @@ const Card = ({ game }: Props) => {
         <HStack justifyContent="space-between">
           <HStack fontSize="2xl" gap="2" color="slate.500">
             {game.plataforms.map((plataform) => (
-              <plataform.plataformIcon />
+              <plataform.plataform.name />
             ))}
           </HStack>
           <div
@@ -45,7 +45,7 @@ const Card = ({ game }: Props) => {
               fontWeight: "bold",
             })}
           >
-            <p>{game.relevance}</p>
+            <p>{game.metacritic}</p>
           </div>
         </HStack>
         <StyledText size="h1">{game.name}</StyledText>

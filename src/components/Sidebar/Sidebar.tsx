@@ -62,6 +62,7 @@ const Sidebar = ({ handleGenres, genreName }: Props) => {
       <ul>
         {genres.map((genre) => (
           <li
+            key={genre.name}
             className={hstack({ mb: "4", cursor: "pointer" })}
             onClick={() => {
               genre.name === genreName
